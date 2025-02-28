@@ -1,59 +1,59 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var textbox = document.querySelector("#result");
-    var numButtons = document.querySelectorAll(".buttons");
-    
-    var firstValue = '';
-    var secondValue = '';
-    var operator = '';
-    var isSecondValue = false;
+document.addEventListener('DOMContentLoaded', function () {
+  let textbox = document.querySelector("#result");
+  let numButtons = document.querySelectorAll(".buttons");
 
-    //when the user clicks on a button
-    numButtons.forEach(function(btn) {
-      btn.addEventListener("click", function(e) {
-        var value = this.value;
-      });
+  //when the user clicks on a button
+  numButtons.forEach(function(btn) {
+    btn.addEventListener("click", function(e) {
+      let value = this.value;
     });
-});
+  });
 
-//clear calculator
-function clear() {
-  if(value === 'C') {
-    firstValue = '';
-    secondValue = '';
-    operator = '';
-    textbox.value = '';
-    isSecondValue = false;
-  } else if (value === "=") { 
-    if (firstValue && secondValue && operator) {
-      textbox.value = calculate(firstValue, operator, secondValue);
-      firstValue = textbox.value;
+  let firstValue = '';
+  let secondValue = '';
+  let operator = '';
+  let isSecondValue = false;
+    
+  //clear calculator
+  function clear() {
+    if(value === 'C') {
+      firstValue = '';
       secondValue = '';
       operator = '';
+      textbox.value = '';
       isSecondValue = false;
+      //equal button
+    } else if (value === "=") { 
+      if (firstValue && secondValue && operator) {
+        textbox.value = calculate(firstValue, operator, secondValue);
+        firstValue = textbox.value;
+        secondValue = '';
+        operator = '';
+        isSecondValue = false;
+      }
     }
   }
-}
-
-function solve() {
+    
+  function solve() {
     if (['+', '-', '*', '/'].includes(value)) {
-    operator = value;
-    firstValue = textbox.value;
-    textbox.value = '';
-    isSecondValue = true;
+      operator = value;
+      firstValue = textbox.value;
+      textbox.value = '';
+      isSecondValue = true;
     } else {
-    if (isSecondValue) {
-      secondValue += value;
-    }else {
-      firstValue += value;
-    }
-    textbox.value += value;
+      if (isSecondValue) {
+        secondValue += value;
+      }else {
+        firstValue += value;
+      } 
+      textbox.value += value;
   }
-
+    
   const calculate = (n1, operator, n2) => {
     let result = '';
     n1 = parseFloat(n1);
     n2 = parseFloat(n2);
-
+    
     if (operator === '+') {
       result = n1 + n2;
     } else if (operator === '-') {
@@ -64,8 +64,12 @@ function solve() {
       result = n1 / n2;
     }
     return result;
+    }
   }
-}
+});
+
+
+
 
 solve()
 clear()

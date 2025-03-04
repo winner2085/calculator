@@ -1,75 +1,30 @@
-document.addEventListener('DOMContentLoaded', function () {
-  let textbox = document.querySelector("#result");
-  let numButtons = document.querySelectorAll(".buttons");
+const buttons = document.querySelectorAll('.buttons');
+const result = document.getElementById("result");
 
-  //when the user clicks on a button
-  numButtons.forEach(function(btn) {
-    btn.addEventListener("click", function(e) {
-      let value = this.value;
-    });
+// displays numbers
+function display() {
+  buttons.addEventListener("click", function () {
+    document.getElementById("result").value += button.innerText;
   });
+}
+ //solves problems
+function solve() {
+  eval(document.getElementById("result").value)
+  document.getElementById("result").value = eval(document.getElementById("result").value);
+}
 
-  let firstValue = '';
-  let secondValue = '';
-  let operator = '';
-  let isSecondValue = false;
-    
-  //clear calculator
-  function clear() {
-    if(value === 'C') {
-      firstValue = '';
-      secondValue = '';
-      operator = '';
-      textbox.value = '';
-      isSecondValue = false;
-      //equal button
-    } else if (value === "=") { 
-      if (firstValue && secondValue && operator) {
-        textbox.value = calculate(firstValue, operator, secondValue);
-        firstValue = textbox.value;
-        secondValue = '';
-        operator = '';
-        isSecondValue = false;
-      }
-    }
-  }
-    
-  function solve() {
-    if (['+', '-', '*', '/'].includes(value)) {
-      operator = value;
-      firstValue = textbox.value;
-      textbox.value = '';
-      isSecondValue = true;
-    } else {
-      if (isSecondValue) {
-        secondValue += value;
-      }else {
-        firstValue += value;
-      } 
-      textbox.value += value;
-  }
-    
-  const calculate = (n1, operator, n2) => {
-    let result = '';
-    n1 = parseFloat(n1);
-    n2 = parseFloat(n2);
-    
-    if (operator === '+') {
-      result = n1 + n2;
-    } else if (operator === '-') {
-      result = n1 - n2;
-    } else if (operator === '*') {
-      result = n1 * n2;
-    } else if (operator === '/') {
-      result = n1 / n2;
-    }
-    return result;
-    }
-  }
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    document.getElementById("result").value += button.innerText;
+  });
 });
 
+function clear() {
+  result.addEventListener("click", () => {
+    document.getElementById("result").value = "";
+  })
+}
 
-
-
-solve()
-clear()
+display();
+solve();
+clear();

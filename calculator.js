@@ -1,12 +1,12 @@
-const buttons = document.querySelectorAll('.buttons');
-const result = document.getElementById("result");
-
-// displays numbers
-function display() {
+document.querySelectorAll('.buttons').forEach(buttons => {
   buttons.addEventListener("click", function () {
     document.getElementById("result").value += button.innerText;
   });
-}
+});
+
+btnEq.addEventListener('click', enter);
+
+
  //solves problems
 function solve() {
   eval(document.getElementById("result").value)
@@ -24,7 +24,3 @@ function clear() {
     document.getElementById("result").value = "";
   })
 }
-
-display();
-solve();
-clear();
